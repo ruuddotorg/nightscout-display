@@ -66,7 +66,7 @@ Library→Manage Libraries) to install the following libraries:
 After installing all the software, try the following examples in the Arduino
 environment to make sure the hardware is working correctly:
 
-* Blink (File→Examples→01.Basics-Blink): this should slowly blink the red LED
+* Blink (File→Examples→01.Basics→Blink): this should slowly blink the red LED
   on the feather board itself. This makes sure your Arduino environment is
   properly configured for uploading code to the feather.
 * Minimatrix (File→Examples→Adafruit LED Backpack→minimatrix16x8): this should

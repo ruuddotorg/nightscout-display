@@ -55,8 +55,8 @@ Assemble the components as follows:
 Follow the [Adafruit
 instructions](https://learn.adafruit.com/adafruit-feather-m0-wifi-atwinc1500/setup)
 to install the Arduino environment and install the M0 board support for the
-Arduino IDE. In addition, use the library manager to install the following
-libraries:
+Arduino IDE. In addition, use the library manager (Sketch→Include
+Library→Manage Libraries) to install the following libraries:
 
 * Adafruit GFX
 * Adafruit LED backpack
@@ -66,16 +66,16 @@ libraries:
 After installing all the software, try the following examples in the Arduino
 environment to make sure the hardware is working correctly:
 
-* Blink (File-Examples-01.Basics-Blink): this should slowly blink the red LED
+* Blink (File→Examples→01.Basics-Blink): this should slowly blink the red LED
   on the feather board itself. This makes sure your Arduino environment is
   properly configured for uploading code to the feather.
-* Minimatrix (File-Examples-Adafruit LED Backpack-minimatrix16x8): this should
+* Minimatrix (File→Examples→Adafruit LED Backpack→minimatrix16x8): this should
   display a few demo patterns on the LED matrix.
   * Change `matrix.begin(0x70)` to `matrix.begin(0x71)` to test the second LED
     matrix, if appropriate.
-* Wifi101 (File-Examples-WiFi101-...): use the examples for the Wifi101 library
+* Wifi101 (File→Examples→WiFi101-...): use the examples for the Wifi101 library
   to test the internet connectivity. Make sure to adjust SSID and password
-  according to your network and insert `Wifi.setpins(8,7,4,2)` in the `setup()`
+  according to your network and insert `WiFi.setpins(8,7,4,2)` in the `setup()`
   function to use the pins specific to the Feather M0 board.
 
 ## Configure and upload

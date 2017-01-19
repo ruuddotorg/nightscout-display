@@ -19,7 +19,7 @@ accordingly.
 * [Adafruit Feather M0 WiFi](https://www.adafruit.com/products/3010): the
   microcontroller that runs the code and drives the displays. Note that I could
   have used the cheaper Adafruit Feather Huzzah (ESP8266-based) instead, but it
-  was out of stock when I built mine. Using this very likely requires
+  was out of stock when I built mine. Using the ESP8266 very likely requires
   substantial code changes.
 * [Female Feather headers](https://www.adafruit.com/products/2886) (16-pin and
   12-pin female headers)
@@ -28,8 +28,8 @@ accordingly.
 * USB Micro-B cable and USB power supply
 * Soldering iron, solder, tape, flush diagonal cutters
 
-If you want to have two displays (a clock in addition to the BG value), you
-also need:
+If all you want is just the blood glucose display, that's all you need. If you
+also want a clock (like in the picture shown above), you also need:
 
 * [Adafruit Feather Doubler](https://www.adafruit.com/products/2890)
 * A second LED Matrix Featherwing, not necessarily in the same color

@@ -229,11 +229,11 @@ class JsonScanner {
       digits_ = 10;
     }
 
-private:
-  const char* const key_;
-  const char* p_;
-  long value_;
-  int digits_;
+  private:
+    const char* const key_;
+    const char* p_;
+    long value_;
+    int digits_;
 };
 
 // Parser for JSON stream from Nightscout. Finds the 4 fields we're interested
@@ -251,7 +251,7 @@ class NightscoutParser {
     }
 
     void reset() {
-      found = 0;
+      found_ = 0;
       now_.reset();
       sgv_.reset();
       trend_.reset();
@@ -259,12 +259,12 @@ class NightscoutParser {
     }
 
     void parse(const char c) {
-      if (found == 4) {
+      if (found_ == 4) {
         return;  // Already found everything in a previous call.
       }
 
       if (now_.scan(c)) {
-        ++found;
+        ++found_;
         // Update time, and display clock if not set previously.
         const bool update_display = (timeStatus() == timeNotSet);
         const time_t t = now_.value() + 3600 * kTimeZone;
@@ -274,16 +274,16 @@ class NightscoutParser {
         }
       }
       if (sgv_.scan(c)) {
-        ++found;
+        ++found_;
       }
       if (trend_.scan(c)) {
-        ++found;
+        ++found_;
       }
       if (datetime_.scan(c)) {
-        ++found;
+        ++found_;
       }
 
-      if (found == 4) {
+      if (found_ == 4) {
         DisplayGlucose(now_.value(), sgv_.value(), trend_.value(), datetime_.value());
         last_update_ = millis();
       }
@@ -298,7 +298,7 @@ class NightscoutParser {
     JsonScanner sgv_;
     JsonScanner trend_;
     JsonScanner datetime_;
-    int found;
+    int found_;
     unsigned long last_update_;
 };
 

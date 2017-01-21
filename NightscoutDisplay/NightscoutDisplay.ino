@@ -12,7 +12,8 @@ const char kWiFiPassphrase[] = "YourWiFiPassphrase";
 const char kNightscoutHostname[] = "yournightscoutsite.azurewebsites.net";
 const uint16_t kNightscoutPort = 443;  // 80 for http, 443 for https.
 
-const int kTimeZone = -8;  // Hours from UTC (-8 is PST).  TODO: automatic DST adjustment
+const int kTimeZone = -8;  // Hours from UTC (-8 is PST).
+const bool kAdjustDST = true;  // DST adjustment according to US rules.
 
 const int kLedBrightness = 0;  // 0..15
 const int kLedRotation = 1;  // 1: USB on the left, 3: USB on the right
@@ -77,13 +78,43 @@ void InitMatrix(Adafruit_8x16minimatrix *matrix, uint8_t i2c_address) {
   matrix->setRotation(kLedRotation);
 }
 
+bool DstInEffect(const time_t t) {
+  const int Y = year(t);
+  const int M = month(t);
+  const int D = day(t);
+  const int h = hour(t);
+
+  if (!kAdjustDST) {
+    return false;
+  } else if (M >= 4 && M <= 10) {
+    return true;
+  } else if (M == 3) {
+    const int dst_start = 14 - ((Y-2004)*5/4)%7;
+    if (D > dst_start || (D == dst_start && h >= 2)) {
+      return true;
+    }
+  } else if (M == 11) {
+    const int dst_end = 7 - ((Y-2004)*5/4)%7;
+    if (D < dst_end || (D == dst_end && h < 1)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 void DisplayClock(const time_t t) {
   if (timeStatus() == timeNotSet) {
     return;
   }
 
-  const int h = hourFormat12(t);
+  int h = hourFormat12(t);
   const int m = minute(t);
+
+  if (DstInEffect(t)) {
+    if (++h == 13) {
+      h = 1;
+    }
+  }
 
   clock_matrix.clear();
   clock_matrix.drawBitmap(0, 0, NARROW_DIGITS[h / 10], 8, 8, LED_ON);

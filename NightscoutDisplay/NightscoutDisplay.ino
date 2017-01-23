@@ -201,6 +201,11 @@ bool ConnectToNightscout(WiFiClient* client) {
 void PerformNightscoutRequest(WiFiClient* client) {
   client->stop();  // Cancel any previous connections.
 
+  // Reconnect if needed.
+  if (WiFi.status() != WL_CONNECTED) {
+    WiFi.begin(kWiFiSsid, kWiFiPassphrase);
+  }
+
   if (ConnectToNightscout(client)) {
     client->println("GET /pebble HTTP/1.1");
     client->print("Host: ");

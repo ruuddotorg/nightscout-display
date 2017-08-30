@@ -48,7 +48,9 @@ Assemble the components as follows:
 * Solder the included male headers and display modules to the LED Matrix Featherwing(s) per the instructions.
 * If using the clock display, solder the included female and stacking headers on the top of the Feather Doubler board.
 * If using the clock display, bridge the A0 solder jumper on *one* of the featherwings.
-* Attach all the boards together by placing male headers into female headers as appropriate.
+* Attach all the boards together by placing male headers into female headers as
+  appropriate. If you are using the doubler, the stacking order is: feather on
+  the bottom, doubler in the middle, display modules on top.
 
 ## Install software and test
 
@@ -67,13 +69,14 @@ After installing all the software, try the following examples in the Arduino
 environment to make sure the hardware is working correctly:
 
 * Blink (File→Examples→01.Basics→Blink): this should slowly blink the red LED
-  on the feather board itself. This makes sure your Arduino environment is
-  properly configured for uploading code to the feather.
+  on the feather board itself (and only that one, the displays themselves will
+  stay dark!). This is to make sure your Arduino environment is properly
+  configured for uploading code to the feather.
 * Minimatrix (File→Examples→Adafruit LED Backpack→minimatrix16x8): this should
   display a few demo patterns on the LED matrix.
   * Change `matrix.begin(0x70)` to `matrix.begin(0x71)` to test the second LED
     matrix, if appropriate.
-* Wifi101 (File→Examples→WiFi101-...): use the examples for the Wifi101 library
+* WiFi101 (File→Examples→WiFi101→...): use the examples for the WiFi101 library
   to test the internet connectivity. Make sure to adjust SSID and password
   according to your network and insert `WiFi.setpins(8,7,4,2)` in the `setup()`
   function to use the pins specific to the Feather M0 board.
